@@ -5,3 +5,4 @@ Website for а theater group
 # Technologies:
  - Frontend -> React + Bootstrap
  - Backend -> Django + Django REST
+ - Currently in development phase
