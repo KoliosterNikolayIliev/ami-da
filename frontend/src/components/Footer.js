@@ -124,6 +124,13 @@ function Footer() {
                     </div>
                 </div>
             </div>
+            <div className="text-center mt-3">
+                <p className="mb-0 text-muted small">{language === 'en' ? "All Rights Reserved": "Всички права запазени"} © {new Date().getFullYear()} <a
+                    href="https://ami-da.eu"
+                    target="_blank"
+                    rel="noopener noreferrer">ami-da.eu</a>
+                </p>
+            </div>
         </footer>
     );
 }
