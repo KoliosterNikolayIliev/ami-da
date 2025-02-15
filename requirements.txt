@@ -5,13 +5,13 @@ Automat==22.10.0
 beautifulsoup4==4.11.2
 cffi==1.15.1
 constantly==15.1.0
-cryptography==44.0.0
-Django==4.2.18
+cryptography==41.0.7
+Django==4.1.13
 django-cors-headers==3.14.0
 django-extensions==3.2.1
 django-filter==22.1
 django-nose==1.4.7
-djangorestframework==3.15.2
+djangorestframework==3.14.0
 gunicorn==22.0.0
 hyperlink==21.0.0
 idna==3.7
@@ -31,7 +31,7 @@ six==1.16.0
 soupsieve==2.4
 South==1.0.2
 sqlparse==0.5.0
-Twisted==24.7.0
+Twisted==23.10.0
 txaio==23.1.1
 typing_extensions==4.7.1
 whitenoise==6.6.0
