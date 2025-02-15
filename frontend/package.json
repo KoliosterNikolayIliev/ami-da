@@ -19,7 +19,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-  "build": "react-scripts build && rsync -a --exclude=index.html --exclude=site.webmanifest build/ build-temp/ && mv build-temp/* build/static/ && rm -r build-temp",
+    "build": "react-scripts build && rsync -a --exclude=index.html --exclude=site.webmanifest build/ build-temp/ && mv build-temp/* build/static/ && rm -r build-temp",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
