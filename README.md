@@ -1,9 +1,8 @@
-# Ami da
-Website for private theater
-Includes:
- - photos
- - videos
- - contacts
- - live section
- - descriptions
+# Ami-da
+Website for а theater group
+<a>https://ami-da.eu
 
+### Technologies:
+ - Frontend -> React + Bootstrap
+ - Backend -> Django + Django REST
+ - Currently in development phase
