@@ -6,7 +6,8 @@ from main.views import (
                         VideoGalleryAPIView,
                         ContactAPIView,
                         PlayAPIView,
-                        LiveVideoAPIView
+                        LiveVideoAPIView,
+                        CharityAPIView,
                         )
 
 app_name = 'main'
@@ -17,4 +18,5 @@ urlpatterns = [
     path('api/plays', PlayAPIView.as_view()),
     path('api/live-video', LiveVideoAPIView.as_view()),
     path('api/contact', ContactAPIView.as_view()),
+    path('api/charity', CharityAPIView.as_view()),
 ]

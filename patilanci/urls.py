@@ -38,16 +38,14 @@ urlpatterns = [
                   path('video-gallery', render_react),
                   path('image-gallery', render_react),
                   path('live', render_react),
-                  path('gradinata', render_react),
+                  path('charity', render_react),
                   # re_path(r"^$", render_react),
                   # re_path(r"^(?:.*)/?$", render_react),
                   # re_path(r'^(?P<path>.*)/$', catch_all),
 
               ]
-
-if not settings.DEBUG:
-    from django.views.static import serve
-    urlpatterns += [
-        path('static/<path:path>/', serve, {'document_root': settings.STATIC_ROOT}),
-        path('media/<path:path>/', serve, {'document_root': settings.MEDIA_ROOT}),
-    ]
+from django.views.static import serve
+urlpatterns += [
+    path('static/<path:path>/', serve, {'document_root': settings.STATIC_ROOT}),
+    path('media/<path:path>/', serve, {'document_root': settings.MEDIA_ROOT}),
+]

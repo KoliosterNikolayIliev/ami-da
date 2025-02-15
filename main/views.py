@@ -1,7 +1,18 @@
 from time import sleep
-from main.models import Image, Video, ContactAndInfo, Play, LiveVideo
+from main.models import (Image,
+                         Video,
+                         ContactAndInfo,
+                         Play,
+                         LiveVideo,
+                         CharityPageData)
+
 from rest_framework import generics
-from main.serializers import ImageSerializer, VideoSerializer, ContactSerializer, PlaySerializer, LiveVideoSerializer
+from main.serializers import (ImageSerializer,
+                              VideoSerializer,
+                              ContactSerializer,
+                              PlaySerializer,
+                              LiveVideoSerializer,
+                              CharityPageDataSerializer)
 
 
 class CarouselAPIView(generics.ListAPIView):
@@ -37,3 +48,7 @@ class PlayAPIView(generics.ListAPIView):
 class ContactAPIView(generics.ListAPIView):
     queryset = ContactAndInfo.objects.all()
     serializer_class = ContactSerializer
+
+class CharityAPIView(generics.ListAPIView):
+    queryset = CharityPageData.objects.all()
+    serializer_class = CharityPageDataSerializer

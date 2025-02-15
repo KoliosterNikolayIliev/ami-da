@@ -5,9 +5,11 @@ import {Navbar, Nav, Container} from 'react-bootstrap';
 import {AppContext} from '../context/AppContext';
 import {Link} from 'react-router-dom';
 import getLiveVideo from "../services/getLiveVideo"
+import getCharityData from "../services/getCharityData";
 
 function Header() {
     const {language, changeLanguage} = React.useContext(AppContext);
+    const {charityData, setCharityData} = useContext(AppContext);
     const {youtubeLink, setYoutubeLink, setLiveDescription, setLiveDescriptionBg} = useContext(AppContext);
     const containerRef = useRef(null);
 
@@ -38,15 +40,29 @@ function Header() {
         getLiveVideo()
             .then(response => {
                 const data = response.data[0]
-                // console.log(data)
-                setYoutubeLink(data.embedded_video)
-                setLiveDescription(data.description)
-                setLiveDescriptionBg(data.description_bg)
+                if (data) {
+                    setYoutubeLink(data.embedded_video)
+                    setLiveDescription(data.description)
+                    setLiveDescriptionBg(data.description_bg)
+                }
             })
             .catch(error =>
                 console.log(error)
             );
     }, [setYoutubeLink, setLiveDescription, setLiveDescriptionBg]);
+
+    useEffect(() => {
+        if (charityData.length === 0) {
+            getCharityData()
+                .then(response => {
+                    const callData = response.data
+                    setCharityData(callData)
+                })
+                .catch(error =>
+                    console.log(error)
+                );
+        }
+    }, [setCharityData, charityData]);
 
     return (
         <header className="header">
@@ -98,9 +114,17 @@ function Header() {
                                     </Nav.Link>
                                 </div>
                             )}
-                            {/*<Nav.Link as={Link} to={'/gradinata'}>*/}
-                            {/*    {language === 'en' ? 'The garden' : 'Градината'}*/}
-                            {/*</Nav.Link>*/}
+
+                            {
+                                (charityData.length > 0 && charityData[0].charity_tab_active) && (
+
+                                    <Nav.Link as={Link} to={'/charity'}>
+                                        {language === 'en'
+                                            ? charityData[0].charity_link_name_en
+                                            : charityData[0].charity_link_name_bg}
+                                    </Nav.Link>
+                                )
+                            }
                             <Nav.Link onClick={handleClick}>
                                 {language === 'en' ? 'БГ' : 'EN'}
                             </Nav.Link>

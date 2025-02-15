@@ -1,0 +1,91 @@
+/* Charity.css */
+.base_container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.base_container h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.base_container p {
+    text-align: justify; /* Or use 'left' for left alignment */
+    margin: 0 0 1.5rem;  /* Add some spacing below the paragraph */
+    line-height: 1.6;    /* Improve readability */
+}
+
+/*.base_container p {*/
+/*    font-size: 1rem;*/
+/*    line-height: 1.6;*/
+/*    text-align: justify;*/
+/*    margin-bottom: 1.5rem;*/
+/*}*/
+
+.aligned-left {
+  max-width: 50%; /* Maximum width for the block */
+  margin: 0 auto;   /* Center the entire container horizontally */
+  text-align: center; /* Center the header text inside */
+    display: flex;
+    flex-direction: column;
+}
+
+.aligned-left div {
+  text-align: left;  /* Align each inner line to the left */
+  /*margin-left: auto; !* Push the text inward to the center *!*/
+  /*margin-right: auto;*/
+  /*display: block;    !* Ensure each line is treated as a block *!*/
+  /*max-width: 515px;  !*!* Limit the width of the inner text *!*!*/
+  /*padding-left: 9rem; !* Add an indent for uniform alignment *!*/
+}
+
+.base_container img {
+    width: 100%;
+    height: auto;
+    max-width: 600px;
+    display: block;
+    margin: 1.5rem auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.video-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center;    /* Center vertically */
+    margin: 2rem auto;      /* Center the container itself */
+    width: 100%;            /* Ensure it takes full width of the parent */
+    max-width: 800px;       /* Limit maximum width */
+    aspect-ratio: 16 / 9;   /* Maintain a 16:9 aspect ratio */
+    position: relative;
+    overflow: hidden;       /* Ensure no overflow issues */
+}
+
+.video-container iframe {
+    width: 100%;            /* Full width within the container */
+    height: 100%;           /* Full height within the container */
+    border: none;           /* Remove default border */
+    border-radius: 8px;     /* Add some rounding for a polished look */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+@media screen and (max-width: 768px) {
+    .base_container h2 {
+        font-size: 1.5rem;
+    }
+
+    .base_container img {
+        max-width: 90%;
+    }
+
+    .video-container {
+        max-width: 100%;     /* Adjust for mobile */
+        aspect-ratio: 16 / 9;
+    }
+    .aligned-left {
+        max-width: 90%;
+    }
+}

@@ -1,4 +1,5 @@
 from django.db import models
+from twisted.plugins.twisted_reactors import default
 
 
 class Play(models.Model):
@@ -71,4 +72,23 @@ class ContactAndInfo(models.Model):
 class NextLiveVideo(models.Model):
     date = models.DateTimeField(blank=False)
     live_video_is_playing = models.BooleanField(default=False, blank=False)
+
+
+class CharityPageData(models.Model):
+    charity_tab_active = models.BooleanField(default=False)
+    charity_link_name_bg = models.CharField(max_length=255, blank=False, null=False, default='Благотворителност')
+    charity_link_name_en = models.CharField(max_length=255, blank=False, null=False, default='Charity')
+    heading_bg = models.CharField(max_length=255, blank=True, null=True)
+    heading_en = models.CharField(max_length=255, blank=True, null=True)
+    main_text_bg = models.TextField(blank=True, null=True)
+    main_text_en = models.TextField(blank=True, null=True)
+    picture = models.ImageField(upload_to='images/', blank=True, null=True)
+    embedded_video = models.TextField(blank=True, null=True)
+    payment_heading_bg = models.CharField(max_length=255, blank=True, null=True)
+    payment_heading_en = models.CharField(max_length=255, blank=True, null=True)
+    payment_info_bg = models.TextField(blank=True, null=True)
+    payment_info_en = models.TextField(blank=True, null=True)
+
+    class Meta:
+        verbose_name_plural = 'Charity page data'
 

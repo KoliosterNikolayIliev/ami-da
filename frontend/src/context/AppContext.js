@@ -14,6 +14,7 @@ export const AppProvider = ({children}) => {
     const [plays, setPlays]=useState(null)
     const [ liveDescription, setLiveDescription ] = useState(null);
     const [ liveDescriptionBg, setLiveDescriptionBg ] = useState(null);
+    const [ charityData, setCharityData ] = useState([])
 
     const changeLanguage = () => {
         setLanguage(prevLanguage => (prevLanguage === 'en' ? 'bg' : 'en'));
@@ -38,9 +39,9 @@ export const AppProvider = ({children}) => {
             liveDescription,
             setLiveDescription,
             liveDescriptionBg,
-            setLiveDescriptionBg
-
-
+            setLiveDescriptionBg,
+            charityData,
+            setCharityData
         }}>
             {children}
         </AppContext.Provider>

@@ -3,6 +3,7 @@ import Card from 'react-bootstrap/Card';
 import Modal from 'react-bootstrap/Modal';
 import {AppContext} from "../context/AppContext";
 import YouTubeIframeComponent from "./YouTubeIframe";
+import TextWithLinks from "./TextWithLinks";
 
 
 function ContentCard({item, description, playName, playNameBg, descriptionBg, content, dateBg, dateUs}) {
@@ -66,7 +67,7 @@ function ContentCard({item, description, playName, playNameBg, descriptionBg, co
                 <Card.Body>
                     <Card.Title>{language === 'en' ? playName : playNameBg}</Card.Title>
                     <Card.Text>
-                        {language === 'en' ? description : descriptionBg}
+                        {language === 'en' ? <TextWithLinks text={description} /> : <TextWithLinks text={descriptionBg} />}
                     </Card.Text>
                 </Card.Body>
                 {content === "projects" &&

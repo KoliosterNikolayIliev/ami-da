@@ -1,5 +1,10 @@
 from rest_framework import serializers
-from main.models import Image, Video, ContactAndInfo, Play, LiveVideo  # SocialNetwork
+from main.models import (Image,
+                         Video,
+                         ContactAndInfo,
+                         Play,
+                         LiveVideo,
+                         CharityPageData)
 
 
 class ImageSerializer(serializers.ModelSerializer):
@@ -41,7 +46,8 @@ class PlaySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Play
-        fields = ('id', 'play_name', 'play_name_bg', 'description', 'description_bg', 'next_play', 'poster_url')  # poster_url
+        fields = (
+        'id', 'play_name', 'play_name_bg', 'description', 'description_bg', 'next_play', 'poster_url')  # poster_url
 
     def get_poster_url(self, obj):
         image = obj.image_set.filter(poster=True)
@@ -60,3 +66,9 @@ class LiveVideoSerializer(serializers.ModelSerializer):
     class Meta:
         model = LiveVideo
         fields = ('embedded_video', 'description', 'description_bg')
+
+
+class CharityPageDataSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CharityPageData
+        fields = "__all__"
