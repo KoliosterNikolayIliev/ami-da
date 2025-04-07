@@ -42,7 +42,7 @@
   /*padding-left: 9rem; !* Add an indent for uniform alignment *!*/
 }
 
-.base_container img {
+.charity-image{
     width: 100%;
     height: auto;
     max-width: 600px;
@@ -52,7 +52,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.video-container {
+.video-container-charity {
     display: flex;
     justify-content: center; /* Center horizontally */
     align-items: center;    /* Center vertically */
@@ -64,7 +64,7 @@
     overflow: hidden;       /* Ensure no overflow issues */
 }
 
-.video-container iframe {
+.video-container-charity iframe {
     width: 100%;            /* Full width within the container */
     height: 100%;           /* Full height within the container */
     border: none;           /* Remove default border */
@@ -77,11 +77,11 @@
         font-size: 1.5rem;
     }
 
-    .base_container img {
+    .base_container .charity-image {
         max-width: 90%;
     }
 
-    .video-container {
+    .video-container-charity {
         max-width: 100%;     /* Adjust for mobile */
         aspect-ratio: 16 / 9;
     }
