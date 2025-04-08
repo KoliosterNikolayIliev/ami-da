@@ -85,7 +85,7 @@ function ContentCard({item, description, playName, playNameBg, descriptionBg, co
                             src={item}
                             alt="Full size"
                             className="custom_modal_img"
-                            style={{maxWidth: '100%', maxHeight: '100vh'}}
+                            style={{maxWidth: '100%', maxHeight: '100%'}}
                         />
                     </Modal.Body>
                 </Modal>

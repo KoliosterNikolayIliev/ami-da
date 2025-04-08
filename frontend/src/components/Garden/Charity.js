@@ -39,8 +39,8 @@ function Charity() {
                         <div key={index}>{line}</div> // Render each part in its own <div>
                     ))}
             </div>
-            <img src={charityData[0].picture} alt="charity"></img>
-            <div className="video-container">
+            <img src={charityData[0].picture} className={'charity-image'} alt="charity"></img>
+            <div className="video-container-charity">
                 <div style={{
                     height: '100%',
                     width: '80%',
