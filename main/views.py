@@ -21,7 +21,6 @@ class CarouselAPIView(generics.ListAPIView):
 
     # just for testing:
     def get(self, request, *args, **kwargs):
-        sleep(1)
         return super().get(request, *args, **kwargs)
 
 

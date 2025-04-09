@@ -1,4 +1,6 @@
 from rest_framework import serializers
+
+from main.mixins import SwapIdForOrderId
 from main.models import (Image,
                          Video,
                          ContactAndInfo,
@@ -7,10 +9,11 @@ from main.models import (Image,
                          CharityPageData)
 
 
-class ImageSerializer(serializers.ModelSerializer):
+class ImageSerializer(SwapIdForOrderId, serializers.ModelSerializer):
     image_field_url = serializers.SerializerMethodField()
     play_name = serializers.SerializerMethodField()
     play_name_bg = serializers.SerializerMethodField()
+    id = serializers.SerializerMethodField()
 
     class Meta:
         model = Image
@@ -26,9 +29,10 @@ class ImageSerializer(serializers.ModelSerializer):
         return obj.play.play_name_bg
 
 
-class VideoSerializer(serializers.ModelSerializer):
+class VideoSerializer(SwapIdForOrderId, serializers.ModelSerializer):
     play_name = serializers.SerializerMethodField()
     play_name_bg = serializers.SerializerMethodField()
+    id = serializers.SerializerMethodField()
 
     class Meta:
         model = Video
@@ -41,13 +45,14 @@ class VideoSerializer(serializers.ModelSerializer):
         return obj.play.play_name_bg
 
 
-class PlaySerializer(serializers.ModelSerializer):
+class PlaySerializer(SwapIdForOrderId, serializers.ModelSerializer):
     poster_url = serializers.SerializerMethodField()
+    id = serializers.SerializerMethodField()
 
     class Meta:
         model = Play
         fields = (
-        'id', 'play_name', 'play_name_bg', 'description', 'description_bg', 'next_play', 'poster_url')  # poster_url
+            'id', 'play_name', 'play_name_bg', 'description', 'description_bg', 'next_play', 'poster_url')  # poster_url
 
     def get_poster_url(self, obj):
         image = obj.image_set.filter(poster=True)

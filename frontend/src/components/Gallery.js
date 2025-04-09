@@ -83,18 +83,19 @@ function Gallery({content}) {
     }
 
 
-    itemsWithFullUrl.sort((a, b) => {
-        const playNameA = a.play_name.toLowerCase();
-        const playNameB = b.play_name.toLowerCase();
-
-        if (playNameA < playNameB) {
-            return -1;
-        }
-        if (playNameA > playNameB) {
-            return 1;
-        }
-        return 0;
-    });
+    // itemsWithFullUrl.sort((a, b) => {
+    //     const playNameA = a.play_name.toLowerCase();
+    //     const playNameB = b.play_name.toLowerCase();
+    //
+    //     if (playNameA < playNameB) {
+    //         return -1;
+    //     }
+    //     if (playNameA > playNameB) {
+    //         return 1;
+    //     }
+    //     return 0;
+    // });
+    itemsWithFullUrl.sort((a, b) => a.id - b.id);
 
     return (
         <div className={'base_container'}>

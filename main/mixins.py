@@ -8,3 +8,8 @@ class SwapDisplayOrderMixin:
             self.model.swap_display_order(original, new_order)
         else:
             super().save_model(request, obj, form, change)
+
+
+class SwapIdForOrderId:
+    def get_id(self, obj):
+        return obj.display_order
