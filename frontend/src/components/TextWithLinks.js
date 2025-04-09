@@ -18,7 +18,7 @@ const TextWithLinks = ({ text }) => {
         return part;
     });
 
-    return <p>{formattedText}</p>;
+    return <>{formattedText}</>;
 };
 
 export default TextWithLinks;
