@@ -37,10 +37,10 @@ function ContentCard({item, description, playName, playNameBg, descriptionBg, co
     const handleModalShow = () => {
         setShowModal(true);
     };
-    // const style = image?{ width: '18rem', marginTop:'1%'}:{opacity:0}
+
     return (
         <>
-            <Card>
+            <Card style={{border: content === 'projects' && 'none'}}>
                 <div style={{position: 'relative'}}>
                     {isLoading && (
                         <div className="custom_spinner_container">
@@ -48,30 +48,40 @@ function ContentCard({item, description, playName, playNameBg, descriptionBg, co
                         </div>
                     )}
                     {content === 'images' || content === 'projects' ? <Card.Img
-                        variant="top"
-                        src={item}
-                        className="custom_img_card_img"
-                        style={{opacity: isLoading ? 0 : 1, cursor: content==='images'?'pointer':'auto'}}
-                        onLoad={handleItemLoad}
-                        onClick={handleModalShow}
-                    /> : <YouTubeIframeComponent
-                        handleItemLoad={handleItemLoad}
-                        width={iframeObject.width}
-                        height={iframeObject.height}
-                        src={iframeObject.src}
-                        title={iframeObject.title}
-                        allow={iframeObject.allow}
-                        allowFullScreen='allowFullScreen'
-                    />}
+                            variant="top"
+                            src={item}
+                            className="custom_img_card_img"
+                            style={{
+                                opacity: isLoading ? 0 : 1,
+                                cursor: content === 'images' ? 'pointer' : 'auto',
+                                width: content === 'projects' ? '60%' : '100%',
+                                height: content === 'projects' && '100%',
+                            }}
+                            onLoad={handleItemLoad}
+                            onClick={handleModalShow}
+                        /> :
+                        <YouTubeIframeComponent
+                            handleItemLoad={handleItemLoad}
+                            width={iframeObject.width}
+                            height={iframeObject.height}
+                            src={iframeObject.src}
+                            title={iframeObject.title}
+                            allow={iframeObject.allow}
+                            allowFullScreen='allowFullScreen'
+                        />
+                    }
                 </div>
                 <Card.Body>
                     <Card.Title>{language === 'en' ? playName : playNameBg}</Card.Title>
-                    <Card.Text>
-                        {language === 'en' ? <TextWithLinks text={description} /> : <TextWithLinks text={descriptionBg} />}
+                    <Card.Text className='text-start'>
+                        {language === 'en' ? <TextWithLinks text={description}/> :
+                            <TextWithLinks text={descriptionBg}/>}
                     </Card.Text>
                 </Card.Body>
                 {content === "projects" &&
                     <Card.Footer>
+                        <small
+                            className="text-muted">{language === 'en' ? 'Performance date: ' : 'Следващо представление: '}</small>
                         <small className="text-muted">{language === 'en' ? dateUs : dateBg}</small>
                     </Card.Footer>
                 }

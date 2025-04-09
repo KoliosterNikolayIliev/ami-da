@@ -101,7 +101,7 @@ function Gallery({content}) {
             <Container>
                 <Row>
                     {itemsWithFullUrl.map(item => (
-                        <Col key={item.id} xs={12} sm={6} md={3} style={{marginBottom: '1.5rem'}}>
+                        <Col key={item.id} xs={12} sm={6} md={content==='images'|| content==='videos'?3:6} style={{marginBottom: '1.5rem'}}>
                             <ContentCard
                                 key={item.id}
                                 item={content === 'images' ? item.image_field_url :
