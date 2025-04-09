@@ -19,13 +19,10 @@ class CarouselAPIView(generics.ListAPIView):
     queryset = Image.objects.filter(carousel=True)
     serializer_class = ImageSerializer
 
-    # just for testing:
-    def get(self, request, *args, **kwargs):
-        return super().get(request, *args, **kwargs)
 
 
 class ImageGalleryAPIView(generics.ListAPIView):
-    queryset = Image.objects.filter(poster=False)
+    queryset = Image.objects.filter(poster=False, carousel=False)
     serializer_class = ImageSerializer
 
 
