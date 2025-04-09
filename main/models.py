@@ -1,8 +1,57 @@
 from django.db import models
-from twisted.plugins.twisted_reactors import default
+from django.db import transaction
 
 
-class Play(models.Model):
+class OrderedModel(models.Model):
+    display_order = models.IntegerField(unique=True, editable=True)
+
+    class Meta:
+        abstract = True
+        ordering = ['display_order']
+
+    @classmethod
+    def swap_display_order(cls, instance, new_order):
+        """
+        Swaps the display_order of an instance with another one,
+        handling the unique constraint properly.
+        """
+        with transaction.atomic():
+            old_order = instance.display_order
+
+            # If the orders are the same, no need to swap
+            if old_order == new_order:
+                return
+
+            # Find the item that has the new_order we want to use
+            try:
+                other_instance = cls.objects.get(display_order=new_order)
+
+                # Use a temporary value to avoid unique constraint violation
+                temp_order = -other_instance.pk  # Guaranteed to be unique and negative
+
+                # First update the other instance to avoid uniqueness conflict
+                other_instance.display_order = temp_order
+                other_instance.save(update_fields=['display_order'])
+
+                # Now update our main instance
+                instance.display_order = new_order
+                instance.save(update_fields=['display_order'])
+
+                # Finally, give the old order to the other instance
+                other_instance.display_order = old_order
+                other_instance.save(update_fields=['display_order'])
+
+            except cls.DoesNotExist:
+                # No item with that order exists, so just update our instance
+                instance.display_order = new_order
+                instance.save(update_fields=['display_order'])
+
+    def change_display_order(self, new_order):
+        """Instance method for convenience"""
+        self.__class__.swap_display_order(self, new_order)
+
+
+class Play(OrderedModel):
     play_name = models.CharField(max_length=150, blank=False)
     play_name_bg = models.CharField(max_length=150, blank=False)
     description = models.TextField(null=True, blank=True)
@@ -13,7 +62,7 @@ class Play(models.Model):
         return self.play_name
 
 
-class Image(models.Model):
+class Image(OrderedModel):
     description = models.CharField(max_length=200, blank=True)
     description_bg = models.CharField(max_length=200, blank=True)
     play = models.ForeignKey(to=Play, on_delete=models.SET_NULL, blank=False, null=True)
@@ -28,7 +77,7 @@ class Image(models.Model):
         super(Image, self).save(*args, **kwargs)
 
 
-class Video(models.Model):
+class Video(OrderedModel):
     description = models.TextField(null=True, blank=True)
     description_bg = models.TextField(null=True, blank=True)
     play = models.ForeignKey(to=Play, on_delete=models.CASCADE, blank=False, null=False)
@@ -91,4 +140,3 @@ class CharityPageData(models.Model):
 
     class Meta:
         verbose_name_plural = 'Charity page data'
-

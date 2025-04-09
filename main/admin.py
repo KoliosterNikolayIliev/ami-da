@@ -1,30 +1,35 @@
 import re
-
 from django.contrib import admin
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 
+from .admin_forms import ImageModelForm, PlayModelForm, VideoModelForm
+from .mixins import SwapDisplayOrderMixin
 from .models import Image, Play, Video, ContactAndInfo, LiveVideo, CharityPageData
 
 
 @admin.register(Image)
-class ImageAdmin(admin.ModelAdmin):
+class ImageAdmin(SwapDisplayOrderMixin, admin.ModelAdmin):
+    form = ImageModelForm
     list_filter = ('play',)
 
     def image_tag(self, obj):
         return format_html('<img src="{}" width="224"/>'.format(obj.image_file.url))
 
     image_tag.short_description = 'Image'
-    list_display = ('image_tag', 'description', 'description_bg', 'play', 'carousel', 'poster', 'date_created')
+    list_display = (
+        'display_order', 'image_tag', 'description', 'description_bg', 'play', 'carousel', 'poster', 'date_created')
 
 
 @admin.register(Play)
-class PlayAdmin(admin.ModelAdmin):
-    pass
+class PlayAdmin(SwapDisplayOrderMixin, admin.ModelAdmin):
+    form = PlayModelForm
+    list_display = ('display_order','play_name')
 
 
 @admin.register(Video)
-class VideoAdmin(admin.ModelAdmin):
+class VideoAdmin(SwapDisplayOrderMixin, admin.ModelAdmin):
+    form = VideoModelForm
     list_filter = ('play',)
 
     def video_tag(self, obj):
@@ -33,7 +38,8 @@ class VideoAdmin(admin.ModelAdmin):
 
     video_tag.short_description = 'Video'
 
-    list_display = ('id', 'video_tag', 'description', 'description_bg', 'play', 'play_main_video', 'date_created')
+    list_display = (
+        'display_order', 'video_tag', 'description', 'description_bg', 'play', 'play_main_video', 'date_created')
 
 
 @admin.register(LiveVideo)
@@ -59,6 +65,7 @@ class ContactAndInfoAdmin(admin.ModelAdmin):
         if ContactAndInfo.objects.count() > 0:
             return False
         return True
+
 
 @admin.register(CharityPageData)
 class CharityPageDataAdmin(admin.ModelAdmin):
