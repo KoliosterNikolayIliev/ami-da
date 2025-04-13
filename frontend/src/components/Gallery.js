@@ -107,6 +107,7 @@ function Gallery({content}) {
                                 key={item.id}
                                 item={content === 'images' ? item.image_field_url :
                                     (content === 'projects' ? (item.poster_url !== 'no_image' ? item.poster_url : noImage) : item.embedded_video)}
+                                aspect_ratio={item.aspect_ratio}
                                 description={item.description}
                                 playName={item.play_name}
                                 playNameBg={item.play_name_bg}

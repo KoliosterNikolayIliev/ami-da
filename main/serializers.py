@@ -14,10 +14,13 @@ class ImageSerializer(SwapIdForOrderId, serializers.ModelSerializer):
     play_name = serializers.SerializerMethodField()
     play_name_bg = serializers.SerializerMethodField()
     id = serializers.SerializerMethodField()
+    aspect_ratio = serializers.SerializerMethodField()
 
     class Meta:
         model = Image
-        fields = ('id', 'image_field_url', 'description', 'description_bg', 'play_name', 'play_name_bg')
+        fields = ('id', 'aspect_ratio', 'image_field_url', 'description', 'description_bg', 'play_name', 'play_name_bg')
+    def get_aspect_ratio(self, obj):
+        return obj.aspect_ratio
 
     def get_image_field_url(self, obj):
         return obj.image_file.url
