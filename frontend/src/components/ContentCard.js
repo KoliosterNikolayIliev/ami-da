@@ -6,7 +6,7 @@ import YouTubeIframeComponent from "./YouTubeIframe";
 import TextWithLinks from "./TextWithLinks";
 
 
-function ContentCard({item, description, playName, playNameBg, descriptionBg, content, dateBg, dateUs}) {
+function ContentCard({item, aspect_ratio='normal', description, playName, playNameBg, descriptionBg, content, dateBg, dateUs}) {
     const {language} = React.useContext(AppContext);
     const [isLoading, setIsLoading] = useState(true);
     //content==='images'?true:false
@@ -37,7 +37,7 @@ function ContentCard({item, description, playName, playNameBg, descriptionBg, co
     const handleModalShow = () => {
         setShowModal(true);
     };
-
+    console.log(item)
     return (
         <>
             <Card style={{border: content === 'projects' && 'none'}}>
@@ -56,6 +56,7 @@ function ContentCard({item, description, playName, playNameBg, descriptionBg, co
                                 cursor: content === 'images' ? 'pointer' : 'auto',
                                 width: content === 'projects' ? '60%' : '100%',
                                 height: content === 'projects' && '100%',
+                                objectPosition: aspect_ratio ==='portrait'?'top' : 'center',
                             }}
                             onLoad={handleItemLoad}
                             onClick={handleModalShow}

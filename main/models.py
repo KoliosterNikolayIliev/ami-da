@@ -63,6 +63,10 @@ class Play(OrderedModel):
 
 
 class Image(OrderedModel):
+    ASPECT_RATIO_CHOICES = (
+        ('normal','normal'),
+        ('portrait','portrait')
+    )
     description = models.CharField(max_length=200, blank=True)
     description_bg = models.CharField(max_length=200, blank=True)
     play = models.ForeignKey(to=Play, on_delete=models.SET_NULL, blank=False, null=True)
@@ -70,6 +74,7 @@ class Image(OrderedModel):
     image_file = models.ImageField(upload_to='images/')
     date_created = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     poster = models.BooleanField(blank=False, default=False)
+    aspect_ratio = models.CharField(max_length=8,choices=ASPECT_RATIO_CHOICES, default='normal')
 
     def save(self, *args, **kwargs):
         if self.poster:

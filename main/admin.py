@@ -18,7 +18,7 @@ class ImageAdmin(SwapDisplayOrderMixin, admin.ModelAdmin):
 
     image_tag.short_description = 'Image'
     list_display = (
-        'display_order', 'image_tag', 'description', 'description_bg', 'play', 'carousel', 'poster', 'date_created')
+        'display_order', 'aspect_ratio', 'image_tag', 'description', 'description_bg', 'play', 'carousel', 'poster', 'date_created')
 
 
 @admin.register(Play)
